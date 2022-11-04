@@ -1,9 +1,10 @@
 const data = require('../data/zoo_data');
 
-const isManager = (employeeId) => data.employees.some((employee) => employee.id === employeeId);
-
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const colabInfo = {};
+  if (employeeName === undefined) return colabInfo;
+
+  return data.employees.find((colab) => Object.values(colab).includes(employeeName));
 }
 
 module.exports = getEmployeeByName;
