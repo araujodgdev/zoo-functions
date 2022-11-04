@@ -1,11 +1,20 @@
 const data = require('../data/zoo_data');
 
 function isManager(id) {
-  // seu código aqui
+  let managers = data.employees.flatMap((colab) => colab.managers);
+  managers = managers.filter((elemnt, i) => managers.indexOf(elemnt) === i);
+  return managers.includes(id);
 }
 
 function getRelatedEmployees(managerId) {
-  // seu código aqui
+  let managed;
+  let output;
+  if (isManager(managerId)) {
+    managed = data.employees.filter((elemnt) => elemnt.managers.includes(managerId));
+    output = managed.map((person) => `${person.firstName} ${person.lastName}`);
+    return output;
+  }
+  throw new Error('O id inserido não é de uma pessoa colaboradora gerente!');
 }
 
 module.exports = { isManager, getRelatedEmployees };
